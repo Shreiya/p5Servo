@@ -2,13 +2,29 @@ var serial; // variable to hold an instance of the serialport library
 var fromSerial = 0; //variable to hold the data
 var myRec = new p5.SpeechRec();
 
+function triggerSpeechRec() {
+  setInterval(initiateSpeechRec, 2000);
+}
+
+function initiateSpeechRec() {
+  try {
+    spRec.start(); // start engine
+  } catch (err) {
+    // do nothing.
+  }
+   // recognition callback
+  console.log("start!!!!!!");
+}
+
+
 function setup() {
   createCanvas(320, 240);
   serial = new p5.SerialPort(); // make a new instance of  serialport librar
   serial.on('list', printList); // callback function for serialport list event
   serial.on('data', serialEvent); // callback for new data coming in
   serial.list(); // list the serial ports
-  serial.open("/dev/cu.usbmodem14111"); // open a port
+  serial.open("/dev/cu.usbmodem1431"); // open a port
+
 
   createCanvas(800, 400);
 		background(255, 255, 255);
@@ -19,12 +35,12 @@ function setup() {
 		text("say something", width/2, height/2);
 		myRec.onResult = showResult;
 		myRec.start();
-
+  	triggerSpeechRec()
 }
 
 function showResult()
 	{
-		if(myRec.resultValue==true) {
+		if(myRec.resultValue==true && myRec.resultString=="no" || myRec.resultString=="please") {
 			background(192, 255, 192);
 			text(myRec.resultString, width/2, height/2);
       myRec.resultValue = 56;
