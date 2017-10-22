@@ -50,7 +50,7 @@ function showResult()
         // var valueToSend = myRec.resultValue;
         // serial.write(valueToSend + ",");
       // var b = int(  brightness(myRec)   );
-      serial.write(valueToSend);
+      // serial.write(valueToSend);
       console.log("worked");
 		}
 	}
