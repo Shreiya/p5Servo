@@ -8,7 +8,7 @@ function setup() {
   serial.on('list', printList); // callback function for serialport list event
   serial.on('data', serialEvent); // callback for new data coming in
   serial.list(); // list the serial ports
-  serial.open("/dev/cu.usbmodem1451"); // open a port
+  serial.open("/dev/cu.usbmodem14111"); // open a port
 
   createCanvas(800, 400);
 		background(255, 255, 255);
@@ -27,7 +27,7 @@ function showResult()
 		if(myRec.resultValue==true) {
 			background(192, 255, 192);
 			text(myRec.resultString, width/2, height/2);
-      myRec.resultValue = "H";
+      myRec.resultValue = 56;
       var valueToSend = myRec.resultValue;
       // serial.write();
 			// console.log(myRec.resultString);
@@ -35,6 +35,7 @@ function showResult()
         // serial.write(valueToSend + ",");
       // var b = int(  brightness(myRec)   );
       serial.write(valueToSend);
+      console.log("worked");
 		}
 	}
 
