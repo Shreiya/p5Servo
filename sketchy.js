@@ -8,12 +8,12 @@ function triggerSpeechRec() {
 
 function initiateSpeechRec() {
   try {
-    spRec.start(); // start engine
+    myRec.start(); // start engine
   } catch (err) {
     // do nothing.
   }
    // recognition callback
-  console.log("start!!!!!!");
+  // console.log("start!!!!!!");
 }
 
 
@@ -35,33 +35,47 @@ function setup() {
 		text("say something", width/2, height/2);
 		myRec.onResult = showResult;
 		myRec.start();
-  	triggerSpeechRec()
+  	triggerSpeechRec();
 }
 
 function showResult()
 	{
-		if(myRec.resultValue==true && myRec.resultString=="no" || myRec.resultString=="please") {
+		if( myRec.resultValue==true && (myRec.resultString=="no" || myRec.resultString=="please")) {
 			background(192, 255, 192);
 			text(myRec.resultString, width/2, height/2);
-      myRec.resultValue = 56;
-      var valueToSend = myRec.resultValue;
-      // serial.write();
-			// console.log(myRec.resultString);
-        // var valueToSend = myRec.resultValue;
-        // serial.write(valueToSend + ",");
-      // var b = int(  brightness(myRec)   );
-      // serial.write(valueToSend);
+      serial.write("cat");
       console.log("worked");
-		}
+      // myRec.continuous;
+		} else if ( myRec.resultValue==true && (myRec.resultString=="yes" || myRec.resultString=="okay")) {
+			background(192, 255, 192);
+			text(myRec.resultString, width/2, height/2);
+      serial.write("hat");
+      console.log("worked again");
+      // myRec.continuous;
 	}
+  }
 
 
 function onStart() {
+  function triggerSpeechRec() {
+  //setInterval(initiateSpeechRec, 2000);
+}
+
+function initiateSpeechRec() {
+  try {
+    myRec.start(); // start engine
+  } catch (err) {
+    // do nothing.
+  }
+  myRec.onResult = recordAndRespond; // recognition callback
+  // console.log("start!!!!!!");
+}
 }
 
 function draw() {
-var valueToSend = myRec.resultValue;
-  serial.write(valueToSend + ",");
+// myRec = new p5.SpeechRec(); // create new speech object
+//     myRec.start(); // start recording
+//     myRec.onResult = showResult; // call showResult
 }
 
 function printList(portList) {
