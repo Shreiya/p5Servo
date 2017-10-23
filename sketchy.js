@@ -43,13 +43,13 @@ function showResult()
 		if( myRec.resultValue==true && (myRec.resultString=="no" || myRec.resultString=="please")) {
 			background(192, 255, 192);
 			text(myRec.resultString, width/2, height/2);
-      serial.write("cat");
+      serial.write(1);
       console.log("worked");
       // myRec.continuous;
 		} else if ( myRec.resultValue==true && (myRec.resultString=="yes" || myRec.resultString=="okay")) {
 			background(192, 255, 192);
 			text(myRec.resultString, width/2, height/2);
-      serial.write("hat");
+      serial.write(0);
       console.log("worked again");
       // myRec.continuous;
 	}
